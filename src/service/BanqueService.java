@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import java.util.Date;
 import java.util.List;
 
 @WebService
@@ -16,7 +17,10 @@ public class BanqueService {
     private BanqueLocal metier;
 
     @WebMethod
-    public Compte addCompte(@WebParam(name = "compte") Compte compte) {
+    public Compte addCompte(@WebParam(name = "solde") double solde) {
+        Compte compte = new Compte();
+        compte.setSolde(solde);
+        compte.setDate_creation(new Date());
         return metier.addCompte(compte);
     }
 
