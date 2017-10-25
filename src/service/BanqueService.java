@@ -5,6 +5,7 @@ import metier.entities.Compte;
 
 import javax.ejb.EJB;
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.util.List;
 
@@ -15,12 +16,12 @@ public class BanqueService {
     private BanqueLocal metier;
 
     @WebMethod
-    public Compte addCompte(Compte compte) {
+    public Compte addCompte(@WebParam(name = "compte") Compte compte) {
         return metier.addCompte(compte);
     }
 
     @WebMethod
-    public Compte getCompte(Long aLong) {
+    public Compte getCompte(@WebParam(name = "code")Long aLong) {
         return metier.getCompte(aLong);
     }
 
@@ -30,17 +31,20 @@ public class BanqueService {
     }
 
     @WebMethod
-    public void verser(Long aLong, double v) {
+    public void verser(@WebParam(name = "code")Long aLong,@WebParam(name = "montant") double v) {
         metier.verser(aLong, v);
     }
 
     @WebMethod
-    public void retirer(Long aLong, double v) {
+    public void retirer(@WebParam(name = "code")Long aLong, double v) {
         metier.retirer(aLong, v);
     }
 
     @WebMethod
-    public void virement(Long aLong, Long aLong1, double v) {
+    public void virement(
+            @WebParam(name = "code1")Long aLong,
+            @WebParam(name = "code2")Long aLong1,
+            @WebParam(name = "montant")double v) {
         metier.virement(aLong, aLong1, v);
     }
 }
