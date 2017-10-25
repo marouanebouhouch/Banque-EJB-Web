@@ -8,35 +8,35 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("/")
+@Path("/comptes")
 public class BanqueRestService {
 
     @EJB
     private BanqueLocal metier;
 
     @POST
-    @Path("/comptes")
+    @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     public Compte addCompte(Compte compte) {
         return metier.addCompte(compte);
     }
 
     @GET
-    @Path("/comptes/{code}")
+    @Path("/{code}")
     @Produces(MediaType.APPLICATION_JSON)
     public Compte getCompte(@PathParam("code") Long aLong) {
         return metier.getCompte(aLong);
     }
 
     @GET
-    @Path("/comptes")
+    @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Compte> listComptes() {
         return metier.listComptes();
     }
 
     @PUT
-    @Path("/comptes/verser")
+    @Path("/verser")
     @Produces(MediaType.APPLICATION_JSON)
     public void verser(@FormParam(value = "code") Long aLong,
                        @FormParam(value = "montant") double v) {
@@ -44,7 +44,7 @@ public class BanqueRestService {
     }
 
     @PUT
-    @Path("/comptes/retirer")
+    @Path("/retirer")
     @Produces(MediaType.APPLICATION_JSON)
     public void retirer(@FormParam(value = "code") Long aLong,
                         @FormParam(value = "montant") double v) {
@@ -52,7 +52,7 @@ public class BanqueRestService {
     }
 
     @PUT
-    @Path("/comptes/virement")
+    @Path("/virement")
     @Produces(MediaType.APPLICATION_JSON)
     public void virement(@FormParam(value = "code1") Long aLong,
                          @FormParam(value = "code2") Long aLong1,
