@@ -4,10 +4,12 @@ import metier.BanqueLocal;
 import metier.entities.Compte;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
+@Stateless
 @Path("/comptes")
 public class BanqueRestService {
 
